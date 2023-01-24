@@ -15,117 +15,7 @@ describe('<App />', () => {
     const label = screen.getByText('추가');
     expect(label).toBeInTheDocument();
 
-    expect(container).toMatchInlineSnapshot(`
-      .c5 {
-        text-align: center;
-        background-color: #304ffe;
-        padding: 10px 20px;
-        border-radius: 8px;
-        cursor: pointer;
-      }
-
-      .c5:hover {
-        background-color: #1e40ff;
-      }
-
-      .c5:active {
-        box-shadow: inset 5px 5px 10px rgba(0,0,0,0.2);
-      }
-
-      .c6 {
-        color: #ffffff;
-        font-size: 16px;
-      }
-
-      .c4 {
-        font-size: 16px;
-        padding: 10px;
-        border-radius: 8px;
-        border: 1px solid #bdbdbd;
-        outline: none;
-      }
-
-      .c0 {
-        min-height: 100vh;
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-align-items: center;
-        -webkit-box-align: center;
-        -ms-flex-align: center;
-        align-items: center;
-        -webkit-box-pack: center;
-        -webkit-justify-content: center;
-        -ms-flex-pack: center;
-        justify-content: center;
-        -webkit-flex-direction: column;
-        -ms-flex-direction: column;
-        flex-direction: column;
-      }
-
-      .c1 {
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
-        display: flex;
-        background-color: #ffffff;
-        -webkit-flex-direction: column;
-        -ms-flex-direction: column;
-        flex-direction: column;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 5px 5px 10px rgba(0,0,0,0.2);
-      }
-
-      .c3 {
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
-        display: flex;
-      }
-
-      .c2 {
-        min-width: 350px;
-        height: 400px;
-        overflow-y: scroll;
-        border: 1px solid #bdbdbd;
-        margin-bottom: 20px;
-      }
-
-      <div>
-        <div
-          class="c0"
-        >
-          <div
-            class="c1"
-          >
-            <div
-              class="c2"
-              data-testid="todoList"
-            />
-            <div
-              class="c3"
-            >
-              <input
-                class="c4"
-                placeholder="할 일을 입력해주세요."
-                value=""
-              />
-              <div
-                class="c5"
-              >
-                <div
-                  class="c6"
-                >
-                  추가
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    `);
+    expect(container).toMatchSnapshot();
   });
 
   it('add and delete items', () => {
@@ -168,5 +58,14 @@ describe('<App />', () => {
     fireEvent.click(button);
 
     expect(todoList.childElementCount).toBe(length);
+  });
+
+  it('load localStorage', () => {
+    localStorage.setItem('todoList', '["todo1", "todo2", "todo3"]');
+
+    render(<App />);
+
+    expect(screen.getByText('todo1')).toBeInTheDocument();
+    expect(screen.getAllByText('삭제').length).toBe(3);
   });
 });
