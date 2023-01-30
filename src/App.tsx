@@ -1,15 +1,26 @@
 import styled from 'styled-components';
+import { Routes, Route } from 'react-router-dom';
 import { TodoListProvider } from 'Contexts';
-import { TodoList, InputContainer } from 'Components';
+import { Add, Detail, List, NotFound, PageHeader } from 'Pages';
 
 function App() {
   return (
     <TodoListProvider>
       <Container>
-        <Content>
-          <TodoList />
-          <InputContainer />
-        </Content>
+        <PageHeader></PageHeader>
+        <Routes>
+          <Route path="*" element={<NotFound />} />
+          <Route
+            path="/"
+            element={
+              <Content>
+                <List />
+              </Content>
+            }
+          />
+          <Route path="/add" element={<Add />} />
+          <Route path="/detail/:id" element={<Detail />} />
+        </Routes>
       </Container>
     </TodoListProvider>
   );

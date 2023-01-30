@@ -8,7 +8,7 @@ export const TodoList = () => {
   return (
     <Container data-testid="todoList">
       {todoList.map((item, index) => (
-        <TodoItem key={item} label={item} onDelete={() => deleteTodo(index)} />
+        <TodoItem key={item} id={index} label={item} onDelete={() => deleteTodo(index)} />
       ))}
     </Container>
   );

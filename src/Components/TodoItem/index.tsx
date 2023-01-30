@@ -1,15 +1,17 @@
 import styled from 'styled-components';
 import { Button } from 'Components/Button';
+import { Link } from 'react-router-dom';
 
 interface Props {
+  readonly id?: number;
   readonly label: string;
   readonly onDelete?: () => void;
 }
 
-export const TodoItem = ({ label, onDelete }: Props) => {
+export const TodoItem = ({ id, label, onDelete }: Props) => {
   return (
     <Container>
-      <Label>{label}</Label>
+      <Label to={`/detail/${id}`}>{label}</Label>
       <Button label="삭제" backgroundColor="#ff1744" hoverColor="#f01440" onClick={onDelete}/>
     </Container>
   );
@@ -23,8 +25,9 @@ const Container = styled.div`
   padding: 10px;
 `;
 
-const Label = styled.div`
+const Label = styled(Link)`
   flex: 1;
   font-size: 16px;
   margin-right: 20px;
+  text-decoration: none;
 `;
