@@ -45,4 +45,17 @@ describe('<InputContainer />', () => {
 
     expect(localStorage.getItem('todoList')).toBe('["study"]');
   });
+
+  it('calls the onAdd function', () => {
+    const handleClick = jest.fn();
+    render(<InputContainer onAdd={handleClick} />);
+
+    const input = screen.getByPlaceholderText('할 일을 입력해주세요.');
+    const button = screen.getByText('추가');
+    expect(handleClick).toHaveBeenCalledTimes(0);
+
+    fireEvent.change(input, { target: { value: 'study' } });
+    fireEvent.click(button);
+    expect(handleClick).toHaveBeenCalledTimes(1);
+  });
 });

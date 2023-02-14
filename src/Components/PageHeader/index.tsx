@@ -7,7 +7,7 @@ export const PageHeader = () => {
 
   if (pathname === '/') {
     title = '할 일 목록';
-  } else if (pathname === 'add') {
+  } else if (pathname === '/add') {
     title = '할 일 추가';
   } else if (pathname.startsWith('/detail')) {
     title = '할 일 상세';
